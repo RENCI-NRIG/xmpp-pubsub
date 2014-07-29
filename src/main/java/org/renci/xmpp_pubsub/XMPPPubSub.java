@@ -110,7 +110,6 @@ public class XMPPPubSub implements CallbackHandler{
 		cb = _cb;
 	}
 
-
 	public void createAccountAndDisconnect(){
 
 		int errorCode;
@@ -308,6 +307,14 @@ public class XMPPPubSub implements CallbackHandler{
 	}
 
 	/**
+	 * expose
+	 * @throws Throwable
+	 */
+	public void _finalize() throws Throwable {
+		finalize();
+	}
+	
+	/**
 	 * create or retrieve an existing leaf node
 	 * @param nodePath
 	 * @return LeafNode
@@ -470,6 +477,40 @@ public class XMPPPubSub implements CallbackHandler{
 			ln.send(item);
 		} catch (XMPPException e) {
 			logger.error("Unable to publish measurement: " + e);
+		}
+	}
+
+	/**
+	 * Publish sliceList
+	 * @param nodePath
+	 * @param measurement
+	 */
+	synchronized void publishSliceList(String nodePath, String sliceListString) {
+
+		if ((xmppCon == null) || (!xmppCon.isConnected()))
+			login();
+
+		LeafNode ln = getLeafNode(nodePath);
+
+		if (ln == null) {
+			logger.error("Unable to publish sliceList: node does not exist");
+			return;
+		}
+
+		logger.info("XMPPPubSub:publishManifest(): Sending sliceList Payload");
+
+		logger.debug("XMPPPubSub:publishManifest(): sliceList Payload = " + sliceListString);
+
+		SimplePayload payload = new SimplePayload("sliceList","pubsub:orca:sliceList", 
+				"<orca xmlns='" + "pubsub:orca:sliceList" + "'>" + "<sliceList>" + sliceListString + "</sliceList>" + "</orca>");
+
+		String itemId = String.valueOf(System.currentTimeMillis());
+		PayloadItem<SimplePayload> item = new PayloadItem<SimplePayload>(itemId, payload);
+
+		try {
+			ln.send(item);
+		} catch (XMPPException e) {
+			logger.error("Unable to publish sliceList: " + e);
 		}
 	}
 }
