@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.renci</groupId>
 	<artifactId>xmpp-pubsub</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<description>XMPP PubSub implementation specific to ORCA</description>
 	<properties>
 		<orca.repository.id>geni-orca-libs</orca.repository.id>
@@ -12,8 +12,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
         <scm>
-                <connection>scm:svn:https://geni-orca.renci.org/svn/orca-external/xmpp-pubsub/tags/xmpp-pubsub-1.0</connection>
-                <url>https://geni-orca.renci.org/svn/orca-external/xmpp-pubsub/tags/xmpp-pubsub-1.0</url>
+                <connection>scm:svn:https://geni-orca.renci.org/svn/orca-external/xmpp-pubsub/trunk</connection>
+                <url>https://geni-orca.renci.org/svn/orca-external/xmpp-pubsub/</url>
         </scm>
 	<repositories>
 		<repository>
