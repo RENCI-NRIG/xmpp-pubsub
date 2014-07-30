@@ -12,6 +12,10 @@
 		<orca.snap.repository.url>http://ci-dev.renci.org/nexus/content/repositories/geni-orca-snapshot/</orca.snap.repository.url>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+        <scm>
+                <connection>scm:svn:https://geni-orca.renci.org/svn/orca-external/xmpp-pubsub/trunk</connection>
+                <url>https://geni-orca.renci.org/svn/orca-external/xmpp-pubsub/</url>
+        </scm>
 	<repositories>
 		<repository>
 			<id>geni-orca-snapshot</id>
