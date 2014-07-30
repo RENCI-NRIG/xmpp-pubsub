@@ -1,8 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.renci</groupId>
 	<artifactId>xmpp-pubsub</artifactId>
-	<version>1.0</version>
+	<version>1.0-SNAPSHOT</version>
 	<description>XMPP PubSub implementation specific to ORCA</description>
 	<properties>
 		<orca.repository.id>geni-orca-libs</orca.repository.id>
@@ -12,8 +13,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
         <scm>
-                <connection>scm:svn:https://geni-orca.renci.org/svn/orca-external/xmpp-pubsub/tags/xmpp-pubsub-1.0</connection>
-                <url>https://geni-orca.renci.org/svn/orca-external/xmpp-pubsub/tags/xmpp-pubsub-1.0</url>
+                <connection>scm:svn:https://geni-orca.renci.org/svn/orca-external/xmpp-pubsub/trunk</connection>
+                <url>https://geni-orca.renci.org/svn/orca-external/xmpp-pubsub/</url>
         </scm>
 	<repositories>
 		<repository>
