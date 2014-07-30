@@ -35,10 +35,6 @@
 			</snapshots>
 		</repository>
 	</repositories>
-	<scm>
-		<connection>scm:svn:https://geni-orca.renci.org/svn/orca-external/pubsub-daemon/trunk</connection>
-		<url>https://geni-orca.renci.org/svn/orca-external/pubsub-daemon/</url>
-	</scm>
 	<distributionManagement>
 		<snapshotRepository>
 			<id>${orca.snap.repository.id}</id>
