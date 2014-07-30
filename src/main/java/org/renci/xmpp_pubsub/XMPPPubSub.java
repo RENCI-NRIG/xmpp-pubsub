@@ -485,7 +485,7 @@ public class XMPPPubSub implements CallbackHandler{
 	 * @param nodePath
 	 * @param measurement
 	 */
-	synchronized void publishSliceList(String nodePath, String sliceListString) {
+	public synchronized void publishSliceList(String nodePath, String sliceListString) {
 
 		if ((xmppCon == null) || (!xmppCon.isConnected()))
 			login();
