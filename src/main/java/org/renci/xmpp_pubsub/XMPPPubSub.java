@@ -141,13 +141,13 @@ public class XMPPPubSub implements CallbackHandler{
 				}
 				else {
 					logger.error("Error while creating new account for user: " + user);
-					System.exit(0);
+					//System.exit(0);
 				}
 			}
 			else {
 				errorCode = 500; // internal server error
 				logger.error("Internal server error while creating new account for user: " + user);
-				System.exit(0);
+				//System.exit(0);
 			}
 		} catch (Exception ee) {
 			logger.error("Unspecified error while creating new account: " + ee);
