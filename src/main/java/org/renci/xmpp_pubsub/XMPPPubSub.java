@@ -38,6 +38,8 @@ import org.jivesoftware.smackx.pubsub.listener.ItemEventListener;
  *
  */
 public class XMPPPubSub implements CallbackHandler{
+	private static final String ORCA_SLICELIST_NS = "pubsub:orca:sliceList";
+	private static final String SLICE_LIST = "sliceList";
 	private static final String ORCA_PLD_NS = "pubsub:orca:manifest";
 	private static final String ORCA_PLD_ROOT = "manifest";
 	private static final String PUBSUB_SERVER_PREFIX = "pubsub.";
@@ -110,6 +112,9 @@ public class XMPPPubSub implements CallbackHandler{
 		cb = _cb;
 	}
 
+	/**
+	 * Connect, create account and disconnect. Next time simple login can be used.
+	 */
 	public void createAccountAndDisconnect(){
 
 		int errorCode;
@@ -166,6 +171,9 @@ public class XMPPPubSub implements CallbackHandler{
 		xmppCon.disconnect();
 	}
 
+	/**
+	 * Login to existing account
+	 */
 	protected void login() {
 
 
@@ -346,6 +354,12 @@ public class XMPPPubSub implements CallbackHandler{
 		}
 	}
 
+	/**
+	 * Subscribe to a given node with a listener
+	 * @param nodeName
+	 * @param listener
+	 * @return subscription object or null
+	 */
 	public synchronized Subscription subscribeToNode(String nodeName, ItemEventListener<?> listener) {
 		try {
 			LeafNode node = (LeafNode)manager.getNode(nodeName);
@@ -359,6 +373,11 @@ public class XMPPPubSub implements CallbackHandler{
 		return null;
 	}
 
+	/**
+	 * Unsubscribe from a given node given previous subscription
+	 * @param nodeName
+	 * @param s
+	 */
 	public synchronized void unsubscribeFromNode(String nodeName, Subscription s) {
 		try {
 			LeafNode node = (LeafNode)manager.getNode(nodeName);
@@ -370,6 +389,10 @@ public class XMPPPubSub implements CallbackHandler{
 		}
 	}
 
+	/**
+	 * Return a list of all nodes
+	 * @return
+	 */
 	public synchronized List<String> listAllNodes() {
 		List<String> l = new ArrayList<String>();
 		if ((xmppCon == null) || (!xmppCon.isConnected()))
@@ -453,7 +476,7 @@ public class XMPPPubSub implements CallbackHandler{
 	}
 
 	/**
-	 * Publish an ORCA manifest
+	 * Publish an ORCA slice manifest to a path
 	 * @param nodePath
 	 * @param measurement
 	 */
@@ -481,7 +504,7 @@ public class XMPPPubSub implements CallbackHandler{
 	}
 
 	/**
-	 * Publish sliceList
+	 * Publish sliceList to a path
 	 * @param nodePath
 	 * @param measurement
 	 */
@@ -501,8 +524,8 @@ public class XMPPPubSub implements CallbackHandler{
 
 		logger.debug("XMPPPubSub:publishManifest(): sliceList Payload = " + sliceListString);
 
-		SimplePayload payload = new SimplePayload("sliceList","pubsub:orca:sliceList", 
-				"<orca xmlns='" + "pubsub:orca:sliceList" + "'>" + "<sliceList>" + sliceListString + "</sliceList>" + "</orca>");
+		SimplePayload payload = new SimplePayload(SLICE_LIST,ORCA_SLICELIST_NS, 
+				"<orca xmlns='" + ORCA_SLICELIST_NS + "'>" + "<sliceList>" + sliceListString + "</sliceList>" + "</orca>");
 
 		String itemId = String.valueOf(System.currentTimeMillis());
 		PayloadItem<SimplePayload> item = new PayloadItem<SimplePayload>(itemId, payload);
