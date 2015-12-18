@@ -159,7 +159,7 @@ public class XMPPPubSub implements CallbackHandler{
 		}
 
 		// Disconnect from the server
-		logger.info("Disconnecting from XMPP server");
+		//logger.info("Disconnecting from XMPP server");
 		if ((xmppCon != null) && (xmppCon.isConnected())){
 			xmppCon.disconnect();
 		}
@@ -309,7 +309,7 @@ public class XMPPPubSub implements CallbackHandler{
 
 	@Override
 	protected void finalize() throws Throwable {
-		logger.info("Disconnecting from XMPP server");
+		//logger.info("Disconnecting from XMPP server");
 		if ((xmppCon != null) && (xmppCon.isConnected()))
 			xmppCon.disconnect();
 	}
