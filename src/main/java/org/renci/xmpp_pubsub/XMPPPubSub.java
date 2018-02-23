@@ -57,12 +57,13 @@ public class XMPPPubSub implements CallbackHandler{
 	private final IPubSubReconnectCallback cb; 
 
 	/**
-	 *
-	 * @param s - server name
-	 * @param prt - port number
-	 * @param u - username
+	 * 
+	 * @param s - server
+	 * @param prt - port
+	 * @param u - user
 	 * @param p - password
-	 * @param l - logger object
+	 * @param l - logger
+	 * @param _cb - callback
 	 */
 	public XMPPPubSub(String s, int prt, String u, String p, Logger l, IPubSubReconnectCallback _cb) {
 		logger = l;
@@ -73,6 +74,16 @@ public class XMPPPubSub implements CallbackHandler{
 		cb = _cb;
 	}
 
+	/**
+	 * 
+	 * @param s - server
+	 * @param prt - port
+	 * @param u - user 
+	 * @param p - password 
+	 * @param r - resource
+	 * @param l - logger 
+	 * @param _cb - callback
+	 */
 	public XMPPPubSub(String s, int prt, String u, String p, String r, Logger l, IPubSubReconnectCallback _cb) {
 		logger = l;
 		server = s;
@@ -83,6 +94,19 @@ public class XMPPPubSub implements CallbackHandler{
 		cb = _cb;
 	}
 
+	/**
+	 * 
+	 * @param s - server
+	 * @param prt - port
+	 * @param u - user
+	 * @param p - password 
+	 * @param kspath - keystore path
+	 * @param kstype - keystore type
+	 * @param tspath - truststore path
+	 * @param tspass - trust- and keystore password
+	 * @param l - logger
+	 * @param _cb - callback
+	 */
 	public XMPPPubSub(String s, int prt, String u, String p, String kspath, String kstype, String tspath, String tspass, Logger l, IPubSubReconnectCallback _cb) {
 		logger = l;
 		server = s;
@@ -97,6 +121,20 @@ public class XMPPPubSub implements CallbackHandler{
 		cb = _cb;
 	}
 
+	/**
+	 * 
+	 * @param s - server
+	 * @param prt - port
+	 * @param u - user
+	 * @param p - password
+	 * @param kspath - keystore path
+	 * @param kstype - keystore type
+	 * @param tspath - truststore path
+	 * @param tspass - truststore password
+	 * @param r - resource 
+	 * @param l - logger 
+	 * @param _cb - callback
+	 */
 	public XMPPPubSub(String s, int prt, String u, String p, String kspath, String kstype, String tspath, String tspass, String r, Logger l, IPubSubReconnectCallback _cb) {
 		logger = l;
 		server = s;
@@ -113,7 +151,7 @@ public class XMPPPubSub implements CallbackHandler{
 	}
 
 	/**
-	 * Connect, create account and disconnect. Next time simple login can be used.
+	 * 
 	 */
 	public void createAccountAndDisconnect(){
 
@@ -161,25 +199,28 @@ public class XMPPPubSub implements CallbackHandler{
 		// Disconnect from the server
 		//logger.info("Disconnecting from XMPP server");
 		if ((xmppCon != null) && (xmppCon.isConnected())){
-                    try {
-			xmppCon.disconnect();
-                    }
-                    catch (NullPointerException npe) {
-                        logger.error("Working around NPE in Smack libraries at connection disconnect.");
-                        xmppCon = null;
-                    }
+			try {
+				xmppCon.disconnect();
+			}
+			catch (NullPointerException npe) {
+				logger.error("Working around NPE in Smack libraries at connection disconnect.");
+				xmppCon = null;
+			}
 		}
 
 	}
 
+	/**
+	 * 
+	 */
 	protected void logout() {
-            try {
-		xmppCon.disconnect();
-            }
-            catch (NullPointerException npe) {
-                logger.error("Working around NPE in Smack libraries at connection disconnect.");
-                xmppCon = null;
-            }
+		try {
+			xmppCon.disconnect();
+		}
+		catch (NullPointerException npe) {
+			logger.error("Working around NPE in Smack libraries at connection disconnect.");
+			xmppCon = null;
+		}
 	}
 
 	/**
@@ -289,11 +330,8 @@ public class XMPPPubSub implements CallbackHandler{
 	}
 
 	/**
-	 * This method handles callbacks for passwords during certificate based authentication
-	 * @param callbacks
-	 * @throws IOException
+	 * @param callbacks - array of callbacks
 	 */
-
 	public void handle(Callback[] callbacks) throws IOException {
 
 		logger.info("Callback handler called");
@@ -319,30 +357,33 @@ public class XMPPPubSub implements CallbackHandler{
 
 
 	@Override
+	/**
+	 * 
+	 */
 	protected void finalize() throws Throwable {
 		//logger.info("Disconnecting from XMPP server");
 		if ((xmppCon != null) && (xmppCon.isConnected()))
-                    try {
-			xmppCon.disconnect();
-                    }
-                    catch (NullPointerException npe) {
-                        logger.error("Working around NPE in Smack libraries at connection disconnect.");
-                        xmppCon = null;
-                    }
+			try {
+				xmppCon.disconnect();
+			}
+		catch (NullPointerException npe) {
+			logger.error("Working around NPE in Smack libraries at connection disconnect.");
+			xmppCon = null;
+		}
 	}
 
 	/**
-	 * expose
-	 * @throws Throwable
+	 * 
+	 * @throws Throwable - exception object
 	 */
 	public void _finalize() throws Throwable {
 		finalize();
 	}
-	
+
 	/**
-	 * create or retrieve an existing leaf node
-	 * @param nodePath
-	 * @return LeafNode
+	 * 
+	 * @param nodePath - path to node
+	 * @return - leaf node
 	 */
 	protected LeafNode getLeafNode(String nodePath) {
 		try {
@@ -372,10 +413,10 @@ public class XMPPPubSub implements CallbackHandler{
 	}
 
 	/**
-	 * Subscribe to a given node with a listener
-	 * @param nodeName
-	 * @param listener
-	 * @return subscription object or null
+	 * 
+	 * @param nodeName - path to node
+	 * @param listener - listener
+	 * @return - subscription
 	 */
 	public synchronized Subscription subscribeToNode(String nodeName, ItemEventListener<?> listener) {
 		try {
@@ -391,9 +432,9 @@ public class XMPPPubSub implements CallbackHandler{
 	}
 
 	/**
-	 * Unsubscribe from a given node given previous subscription
-	 * @param nodeName
-	 * @param s
+	 * 
+	 * @param nodeName - node name
+	 * @param s - subscription
 	 */
 	public synchronized void unsubscribeFromNode(String nodeName, Subscription s) {
 		try {
@@ -407,8 +448,8 @@ public class XMPPPubSub implements CallbackHandler{
 	}
 
 	/**
-	 * Return a list of all nodes
-	 * @return
+	 * 
+	 * @return - list of all nodes
 	 */
 	public synchronized List<String> listAllNodes() {
 		List<String> l = new ArrayList<String>();
@@ -442,7 +483,7 @@ public class XMPPPubSub implements CallbackHandler{
 	}
 
 	/**
-	 * delete all nodes in the server
+	 * Delete all nodes
 	 */
 	public synchronized void deleteAllNodes() {
 		if ((xmppCon == null) || (!xmppCon.isConnected()))
@@ -470,8 +511,10 @@ public class XMPPPubSub implements CallbackHandler{
 		}
 	}
 
+
 	/**
-	 * delete a node in the server
+	 * Delete specified node
+	 * @param nodepath - path to node
 	 */
 	public synchronized void deleteNode(String nodepath) {
 		if ((xmppCon == null) || (!xmppCon.isConnected()))
@@ -493,9 +536,9 @@ public class XMPPPubSub implements CallbackHandler{
 	}
 
 	/**
-	 * Publish an ORCA slice manifest to a path
-	 * @param nodePath
-	 * @param measurement
+	 * Publish manifest document 
+	 * @param nodePath - path to node
+	 * @param manifest - serialized manifest
 	 */
 	public synchronized void publishManifest(String nodePath, String manifest) {
 
@@ -520,10 +563,11 @@ public class XMPPPubSub implements CallbackHandler{
 		}
 	}
 
+	
 	/**
-	 * Publish sliceList to a path
-	 * @param nodePath
-	 * @param measurement
+	 * Publish slice list
+	 * @param nodePath - path to node
+	 * @param sliceListString - serialized list of slices
 	 */
 	public synchronized void publishSliceList(String nodePath, String sliceListString) {
 

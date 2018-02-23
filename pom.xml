@@ -5,15 +5,18 @@
 	<artifactId>xmpp-pubsub</artifactId>
 	<version>1.1</version>
 	<description>XMPP PubSub implementation specific to ORCA</description>
+
 	<properties>
-		<orca.repository.id>geni-orca-libs</orca.repository.id>
-		<orca.repository.url>http://ci-dev.renci.org/nexus/content/repositories/geni-orca-libs</orca.repository.url>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-        <scm>
-                <connection>scm:svn:https://geni-orca.renci.org/svn/orca-external/xmpp-pubsub/trunk</connection>
-                <url>https://geni-orca.renci.org/svn/orca-external/xmpp-pubsub/</url>
-        </scm>
+
+	<url>https://github.com/RENCI-NRIG/xmpp-pubsub</url>
+
+	<organization>
+		<name>RENCI</name>
+		<url>http://www.renci.org</url>
+	</organization>
+
 	<repositories>
 		<repository>
 			<id>geni-orca-libs</id>
@@ -24,22 +27,37 @@
 			</snapshots>
 		</repository>
 	</repositories>
+
+	<developers>
+		<developer>
+			<id>ibaldin</id>
+			<name>Ilya Baldin</name>
+			<email>ibaldin@renci.org</email>
+		</developer>
+	</developers>
+
+	<issueManagement>
+		<system>Ahab Github</system>
+		<url>https://github.com/RENCI-NRIG/xmlpp-pubsub/issues</url>
+	</issueManagement>
+
+	<scm>
+		<connection>scm:git:git@github.com:RENCI-NRIG/xmpp-pubsub.git</connection>
+		<url>https://github.com/RENCI-NRIG/xmpp-pubsub</url>
+		<tag>master</tag>
+	</scm>
+
 	<distributionManagement>
 		<snapshotRepository>
-			<id>${orca.snap.repository.id}</id>
-			<name>Orca Project Maven Snapshot Repository</name>
-			<url>${orca.snap.repository.url}</url>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
 		<repository>
-			<id>${orca.repository.id}</id>
-			<name>Orca Project Maven Release Repository</name>
-			<url>${orca.repository.url}</url>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</distributionManagement>
-	<organization>
-		<name>RENCI</name>
-		<url>http://www.renci.org</url>
-	</organization>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -63,8 +81,28 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.7</version>
+				<executions>
+					<execution>
+						<id>default-deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
