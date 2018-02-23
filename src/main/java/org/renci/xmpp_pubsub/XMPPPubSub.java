@@ -161,14 +161,25 @@ public class XMPPPubSub implements CallbackHandler{
 		// Disconnect from the server
 		//logger.info("Disconnecting from XMPP server");
 		if ((xmppCon != null) && (xmppCon.isConnected())){
+                    try {
 			xmppCon.disconnect();
+                    }
+                    catch (NullPointerException npe) {
+                        logger.error("Working around NPE in Smack libraries at connection disconnect.");
+                        xmppCon = null;
+                    }
 		}
 
 	}
 
 	protected void logout() {
-
+            try {
 		xmppCon.disconnect();
+            }
+            catch (NullPointerException npe) {
+                logger.error("Working around NPE in Smack libraries at connection disconnect.");
+                xmppCon = null;
+            }
 	}
 
 	/**
@@ -311,7 +322,13 @@ public class XMPPPubSub implements CallbackHandler{
 	protected void finalize() throws Throwable {
 		//logger.info("Disconnecting from XMPP server");
 		if ((xmppCon != null) && (xmppCon.isConnected()))
+                    try {
 			xmppCon.disconnect();
+                    }
+                    catch (NullPointerException npe) {
+                        logger.error("Working around NPE in Smack libraries at connection disconnect.");
+                        xmppCon = null;
+                    }
 	}
 
 	/**
