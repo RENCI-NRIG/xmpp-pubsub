@@ -22,7 +22,7 @@
 		<repository>
 			<id>geni-orca-libs</id>
 			<name>Orca Project Maven Repository</name>
-			<url>http://ci-dev.renci.org/nexus/content/repositories/geni-orca-libs</url>
+			<url>https://nrig-nexus.renci.org/repository/geni-orca-libs</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
